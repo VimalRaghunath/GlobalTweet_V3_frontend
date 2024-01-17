@@ -1,0 +1,10 @@
+.Widgets{
+    flex: 0.3;
+    
+}
+
+.followbutton{
+    background-color: rgb(94, 170, 208);
+    color: black;
+    border-radius: 30px;
+}

@@ -1,0 +1,27 @@
+.Sidebar-Option{
+    display: flex ;
+    align-items: center;
+    cursor: pointer;
+    justify-content: start;
+    border-radius: 33px;
+    padding: 0 1rem;
+    margin: 0.4rem 0;
+}
+
+.Sidebar-Option:hover{
+    background-color: #86caf5;
+}
+
+.SidebarOptionicon{
+    font-size: 1.8rem !important;
+}
+
+.SidebarOption__label{
+    margin-left: 1.5rem;
+    font-weight: 200;
+    font-size: 1.5rem;
+}
+
+.Sidebar-Option__active h2{
+   font-weight:600
+}

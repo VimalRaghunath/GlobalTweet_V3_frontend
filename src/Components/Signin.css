@@ -1,0 +1,129 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+    
+}
+
+.Signin{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color: white;
+    box-shadow: 0 0.188em 1.550em rgb(77, 77, 77);
+    width: 450px;
+    height: 500px;
+    border-radius: 30px;
+    padding: 40px;
+
+}
+
+.SignintoGlobalTweet{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.SigninwithGoogle{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: white;
+    color: rgb(197, 32, 32);
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid;
+    padding: 10px 40px 10px 40px;
+    width: 210px;
+}
+
+.SigninwithApple{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background-color: white;
+    color: rgb(23, 123, 9);
+    border-radius: 20px;
+    border: 1px solid;
+    padding: 10px 46px 10px 46px;
+    width:210px;
+    
+}
+
+.signinbutton{
+    border-radius: 20px;
+    background-color: #2aadff;
+    font-weight: bold;
+    color: white;
+    width: 250px;
+    padding: 10px 68px 10px 62px;
+}
+
+.CreateanAccount{
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 10px 65px 10px 65px;
+    border: 1px solid;
+    width: 250px;
+    text-align: center;
+
+    
+}
+
+.SigninwithGoogle:hover{
+    background-color:rgb(128, 182, 197);
+    cursor: pointer;
+}
+
+.SigninwithApple:hover{
+    background-color:rgb(128, 182, 197);
+    cursor: pointer;
+}
+
+.CreateanAccount:hover{
+    background-color:rgb(128, 182, 197);
+    cursor: pointer;
+}
+
+
+.hr-main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.hr1,.hr3{
+    height: 10%;
+    width: 100%;
+    background-color: white;
+    flex-basis: 45%;
+
+}
+
+
+.hr2{
+    text-align: center;
+    color: white;
+    flex-basis: 10%;
+
+}
+
+.input1{
+    height: 25px;
+    width: 250px;
+}
+
+.input2{
+    height: 25px;
+    width: 250px;
+    
+}

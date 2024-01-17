@@ -1,0 +1,92 @@
+.Newpost{
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid;
+}
+
+.Newpost{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 17%;
+}
+
+.Newpost{
+  width: 70%;
+  background-color: #fff; /* Add your desired background color */
+  padding: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for better visibility */
+}
+
+
+
+
+
+
+
+/* 
+.Newpostform{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.Newpostformfield{
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+
+.Newpostinput{
+  
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
+
+.Newpostoxinput input{
+
+   border: none;
+   height: 3rem;
+   width: 100%;
+   border-bottom: 1px solid;
+   margin-bottom: 1rem;
+}
+
+.Newpostinput input::placeholder{
+  
+  font-size: 1.2rem;
+}
+
+.Newposticons{
+  color: var(--twitter-primary) !important ;
+}
+
+.Newposticon{
+ 
+    margin-right: 1rem ;
+    cursor: pointer;
+}
+
+.Newpostbutton{
+  background-color: var(--twitter-primary) !important;
+  border-radius: 33px !important;
+  color: var(--white) !important ;
+  font-size: 0.9rem !important;
+  text-transform: capitalize !important;
+  border: none !important;
+}
+
+.Newpostbutton:hover{
+    background-color: rgb(50, 173, 204)
+
+}
+ */

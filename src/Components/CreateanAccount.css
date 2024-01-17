@@ -1,0 +1,60 @@
+.CreateanAccountcontainer{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+    
+}
+
+.CreateanAccountnew{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color: white;
+    box-shadow: 0 0.188em 1.550em rgb(77, 77, 77);
+    width: 450px;
+    height: 530px;
+    border-radius: 30px;
+    padding: 40px;
+
+}
+
+.Name{
+    height: 25px;
+    width: 250px;
+}
+
+.Email{
+    height: 25px;
+    width: 250px;
+    
+}
+
+.Mobile{
+    height: 25px;
+    width: 250px;
+    
+}
+
+.Username{
+    height: 25px;
+    width: 250px;
+    
+}
+
+.Password{
+    height: 25px;
+    width: 250px;
+    
+}
+
+.GlobalTweetimage{
+    height:100px;
+    padding: 10px;
+}
+
+
+
+

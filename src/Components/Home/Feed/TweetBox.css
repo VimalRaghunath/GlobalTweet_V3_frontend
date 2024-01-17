@@ -1,0 +1,114 @@
+ .TweetBox{
+    width: 100%;
+    display: flex;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid;
+}
+
+.TweetBoxform{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.TweetBoxformfield{
+  margin-left: 1rem;
+}
+
+
+.TweetBoxavatar{
+
+}
+
+.TweetBoxinput{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
+
+.TweetBoxinput input{
+   border: none;
+   height: 3rem;
+   width: 100%;
+   border-bottom: 1px solid;
+   margin-bottom: 1rem;
+}
+
+.TweetBoxinput input::placeholder{
+  font-size: 1.2rem;
+}
+
+.TweetBoxicons{
+  color: var(--twitter-primary) !important ;
+}
+
+.TweetBoxicon{
+    margin-right: 1rem ;
+    cursor: pointer;
+}
+
+.TweetButton{
+  background-color: var(--twitter-primary) !important;
+  border-radius: 33px !important;
+  color: var(--white) !important ;
+  font-size: 0.9rem !important;
+  text-transform: capitalize !important;
+  border: none !important;
+}
+
+.TweetButton:hover{
+    background-color: var(--twitter-primary-2) !important;
+
+}
+
+.TweetBoxform {
+  display: flex;
+  padding: 20px;
+  border-bottom: 1px solid #eff0f1;
+}
+
+.TweetBoxavatar {
+  margin-right: 15px;
+}
+
+.TweetBoxformfield {
+  flex: 1;
+}
+
+.TweetBoxinput {
+  display: flex;
+  flex-direction: column;
+}
+
+.TweetBoxinput input {
+  flex: 1;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  outline-width: 0;
+}
+
+.TweetBoxicons {
+  display: flex;
+  align-items: center;
+}
+
+.TweetBoxicon {
+  color: #1da1f2;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 20px;
+} 
+
+
+
+
+
+
+
+
+
