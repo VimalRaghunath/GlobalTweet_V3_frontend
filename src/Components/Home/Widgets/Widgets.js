@@ -42,7 +42,7 @@ function Widgets() {
           Authorization:`bearer ${cookie.cookies}`,
         },
       });
-      console.log("s");
+      // console.log("s");
     } catch (error) {
       console.error("Error following user:", error);
     }
