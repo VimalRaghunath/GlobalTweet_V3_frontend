@@ -44,6 +44,7 @@ function Profile() {
   const [openCommentModal, setOpenCommentModal] = useState(false);
   const [commentInput, setCommentInput] = useState('');
   const [selectedPostId, setSelectedPostId] = useState(null);
+  // console.log(cookie.cookies,"sd");
 
   async function newcookie() {
     const posts = await AxiosInstance.get("/api/user/profile", {

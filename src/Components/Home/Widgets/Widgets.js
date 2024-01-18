@@ -8,13 +8,15 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { AxiosInstance } from '../../AxiosInstance';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 function Widgets() {
  
 //  const [state,setState] = useState("")
  const [peoples,setPeoples] = useState([])
- const navigate = useNavigate()
- const { id } = useParams()
+ const navigate = useNavigate();
+ const { id } = useParams();
+ const [cookie, removecookie] = useCookies(["cookies"]);
 
 
  useEffect(() => {
@@ -34,11 +36,18 @@ function Widgets() {
 
   const handleFollow = async (userId) => {
     try {
-      await AxiosInstance.post(`/api/user/follow/${userId}`);
+      console.log(cookie.cookies);
+      await AxiosInstance.post(`/api/user/follow/${userId}`, {
+        headers: {
+          Authorization:`bearer ${cookie.cookies}`,
+        },
+      });
+      console.log("s");
     } catch (error) {
       console.error("Error following user:", error);
     }
   };
+  
 
   const handleUnfollow = async (userId) => {
 
@@ -48,7 +57,7 @@ function Widgets() {
       console.error("Error unfollowing user:", error);
     }
   };
-console.log(peoples);
+// console.log(peoples);
 
   return (
     <div className='Widgets'>
@@ -61,7 +70,7 @@ console.log(peoples);
         <ListItemAvatar>
           <Avatar style={{ width: '50px', height: '50px' }} alt="Remy Sharp" src={name?.Avatar} />
         </ListItemAvatar>
-        <ListItemText onClick={()=>navigate(`/userbyid/${name?._id}`)}
+        <ListItemText onClick={()=>navigate(`/userbyid/${name?._id}`)} 
           primary=  {name?.username}
           secondary={
             <React.Fragment>
@@ -73,18 +82,22 @@ console.log(peoples);
               >
               {name?.name}
               </Typography>
-               { name.followed ? (
-
-              <button className='followbutton' onClick={() => handleUnfollow(name._id)}> Unfollow </button> 
-
-               ) : (
-               
-              <button className='followbutton' onClick={() => handleFollow(name._id)}> Follow </button>
-
-               )}
+          
+              
+                 
              </React.Fragment>
           }
-        />
+          />
+
+
+                 
+                 <button className='followbutton' onClick={() => handleUnfollow(name._id)}> Unfollow </button> 
+                 
+              
+                   <button className='followbutton' onClick={() => handleFollow(name._id)}> Follow </button>
+                   
+
+      
       </ListItem>
 ))}
       {/* <Divider variant="inset" component="li" />
