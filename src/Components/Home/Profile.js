@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 import Editprofile from "./Editprofile";
 import Editcoverphoto from "./Editcoverphoto";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
-import {
-  FavoriteBorderRounded,
-  FavoriteRounded,
-} from "@mui/icons-material/FavoriteBorderRounded";
+// import {
+//   FavoriteBorderRounded,
+//   FavoriteRounded,
+// } from "@mui/icons-material/FavoriteBorderRounded";
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -36,7 +36,6 @@ function Profile() {
   const [cookie, removecookie] = useCookies(["cookies"]);
   const [mypost, setMypost] = useState([]);
   // const [posts,setPosts] = useState([])
-  const navigate = useNavigate();
   const [editProfileOpen, setEditProfileOpen] = useState(false);
   const [coverphotoOpen, setCoverphotoOpen] = useState(false);
   const [liking, setLiking] = useState(false)
@@ -158,6 +157,13 @@ function Profile() {
     }
     // window.location.reload()
   };
+ 
+  const navigate = useNavigate();
+
+  const viewComment=()=>{
+    const postId= selectedPostId;
+    navigate(`/comments/${postId}`)
+  }
 
   // useEffect( () => {
   //   async function postcookie(){
@@ -278,10 +284,15 @@ function Profile() {
                     <Typography variant="body2" color="text.secondary">
                       {post?.likes.length}
                     </Typography>
-                    <IconButton aria-label="comment">
-                      <ChatBubbleOutlineRoundedIcon />
+                    <IconButton aria-label="comment"
+                    onClick={() => handleComment(post._id)}
+                    >
+                      <ChatBubbleOutlineRoundedIcon/>
                     </IconButton>
-                    &nbsp;
+                    <Typography variant="body2" color="text.secondary">
+                      {post?.comments.length}
+                    </Typography>
+                     &nbsp;
                     <IconButton aria-label="retweet">
                       <RepeatRoundedIcon />
                     </IconButton>
@@ -324,6 +335,13 @@ function Profile() {
               <Button variant="contained" color="primary" onClick={handleAddComment}>
                 Submit
               </Button>
+              <Button
+                 variant="contained"
+                 color="primary"
+                 onClick={viewComment}
+              >
+                 view Comments
+               </Button>
             </CardActions>
           </Card>
         </DialogContent>
