@@ -117,6 +117,7 @@ function Profile() {
 
   const handleLogout = () => {
     removecookie("cookies");
+    localStorage.removeItem("user")
     navigate("/");
   };
 

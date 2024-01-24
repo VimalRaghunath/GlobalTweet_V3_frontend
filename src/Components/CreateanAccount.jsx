@@ -3,13 +3,14 @@ import React from 'react'
 import Logo from "./Assets/GlobalTweet.jpg";
 import { useNavigate } from "react-router-dom";
 import { AxiosInstance } from "./AxiosInstance";
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { useSnackbar } from "notistack";
+
 
 
 
 function CreateanAccount() {
   const navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const Register = async (e) => {
     e.preventDefault();
@@ -32,10 +33,11 @@ function CreateanAccount() {
 
       if (response.data.status === "success") {
         navigate("/");
-        // toast.success('Account created Successfully', { position: toast.POSITION.TOP_CENTER });
+        enqueueSnackbar('registration successfull')
       }
     } catch (error) {
-      // toast.error('Error', { position: toast.POSITION.TOP_CENTER });
+      enqueueSnackbar('registration failed')
+      
       console.error(error);
     }
   };

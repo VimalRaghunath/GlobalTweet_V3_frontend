@@ -7,10 +7,12 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "./Firebase";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { useSnackbar } from "notistack";
 
 function Signin() {
   const [_, setcookie] = useCookies(["cookies"]);
   const navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const Signin = async (e) => {
     e.preventDefault();
@@ -27,20 +29,22 @@ function Signin() {
           password: password,
         }
       );
-      console.log(response);
+      console.log(response?.data?.rest);
       if (response.data.status === "user_success") {
         setcookie("cookies", response.data.data);
-        alert("Signed Successfully");
+        const userObj=response?.data?.rest
+        localStorage.setItem("user",JSON.stringify(userObj))
+        enqueueSnackbar('login successfull');
         navigate("/home");
       }
       if(response.data.status==="admin_success"){
         setcookie("cookies", response.data.data);
-        toast.success("Signed successfully")
+        enqueueSnackbar('login successfull')
         navigate("/admindash");
 
       }
     } catch (error) {
-      toast.error("an error occurred")
+      enqueueSnackbar('login failed')
       console.error(error);
     }
   };
