@@ -92,6 +92,32 @@ const userId=user?._id
     getFollowersCount();
   }, []); 
     
+
+  const getFollowingCount = async () => {
+    try {
+      const followingCountResponse = await AxiosInstance.get(
+        `/api/user/followingCount/${userId}`,
+       
+        {
+          headers: {
+            Authorization: `bearer ${cookie.cookies}`,
+          },
+        }
+      );
+  
+      return setFollowingCount(followingCountResponse.data.count);
+      
+    } catch (error) {
+
+      console.error("Error fetching followers count:", error);
+    
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    getFollowingCount();
+  }, []); 
    
 
   useEffect(() => {
