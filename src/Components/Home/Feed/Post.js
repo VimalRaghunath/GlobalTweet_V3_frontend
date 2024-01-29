@@ -38,7 +38,6 @@ function Post({ userId }) {
     }
     getall();
   }, [liking, commenting]);
-  // console.log(post, "aaaa");
 
   const handleLike = async (postId) => {
     try {
@@ -76,7 +75,6 @@ function Post({ userId }) {
       console.error(error);
     }
   };
-  // console.log("this is post", post);
   const navigate = useNavigate();
 
 const viewComment=()=>{

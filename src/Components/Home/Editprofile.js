@@ -36,7 +36,6 @@ function Editprofile({ open, onClose }) {
   const handleupload = async () => {
     try {
       const url = await uploadAvatar(avatar);
-      // console.log(url);
       await AxiosInstance.put(
         "/api/user/editavatar",
         {

@@ -37,7 +37,6 @@ function TweetBox() {
     e.preventDefault();
     
     const photo = await upload(file);
-    console.log(photo);
       
         try {
           await AxiosInstance.post(

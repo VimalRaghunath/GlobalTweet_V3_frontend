@@ -16,9 +16,10 @@ import AdminHome from "./Components/Admin";
 import NotFound from "./Components/Home/NotFound";
 import Admindashboard from "./Components/Admindashboard";
 import Comments from "./Components/Home/Feed/Comments";
-import { SnackbarProvider, useSnackbar } from "notistack";
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { SnackbarProvider } from "notistack";
+import Followers from "./Components/Home/Followers";
+import Following from "./Components/Home/Following";
+
 
 function App() {
   const [cookie, ,] = useCookies(["cookies"]);
@@ -47,6 +48,8 @@ function App() {
                 <Route path="/post" element={<Post />} />
                 <Route path="/userbyid/:userId" element={<UserbyId />} />
                 <Route path="/comments/:postId" element={<Comments />} />
+                <Route path="/followers" element={<Followers/>}/>
+                <Route path="/following" element={<Following/>}/>
 
                 <Route path="/admin" element={<AdminHome />} />
                 <Route element={<AdminHome />}>

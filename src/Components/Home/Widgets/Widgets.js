@@ -12,7 +12,6 @@ import { useCookies } from "react-cookie";
 import { useSnackbar } from "notistack";
 
 function Widgets() {
-  //  const [state,setState] = useState("")
   const [peoples, setPeoples] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -39,7 +38,6 @@ function Widgets() {
       const logedinuser = localStorage.getItem("user");
       const currentUser = JSON.parse(logedinuser);
       const follow = currentUser?.following;
-      console.log(follow);
 
       const lastIndex = follow.length - 1;
       if (userId !== follow[lastIndex]) {
@@ -64,7 +62,6 @@ function Widgets() {
       const logedinuser = localStorage.getItem("user");
       const currentUser = JSON.parse(logedinuser);
       const follow = currentUser?.following;
-      console.log(follow);
       if (follow.includes(userId)) {
       const index = follow.indexOf(userId);
       if (index !== -1) {
@@ -82,7 +79,6 @@ function Widgets() {
   const isFollowing = (userid) => {
     const logedinuser = localStorage.getItem("user");
     const currentUser = JSON.parse(logedinuser);
-    console.log(currentUser?.following);
     return currentUser?.following.includes(userid);
   };
 

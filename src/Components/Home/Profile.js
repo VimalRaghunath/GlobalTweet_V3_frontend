@@ -9,11 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Editprofile from "./Editprofile";
 import Editcoverphoto from "./Editcoverphoto";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
-// import {
-//   FavoriteBorderRounded,
-//   FavoriteRounded,
-// } from "@mui/icons-material/FavoriteBorderRounded";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
@@ -32,30 +28,73 @@ import {
 } from "@mui/material";
 
 function Profile() {
+
+
+
   const [state, setState] = useState("");
   const [cookie, removecookie] = useCookies(["cookies"]);
   const [mypost, setMypost] = useState([]);
-  // const [posts,setPosts] = useState([])
   const [editProfileOpen, setEditProfileOpen] = useState(false);
   const [coverphotoOpen, setCoverphotoOpen] = useState(false);
-  const [liking, setLiking] = useState(false)
+  const [liking, setLiking] = useState(false);
   const [commenting, setCommenting] = useState([]);
   const [openCommentModal, setOpenCommentModal] = useState(false);
-  const [commentInput, setCommentInput] = useState('');
+  const [commentInput, setCommentInput] = useState("");
   const [selectedPostId, setSelectedPostId] = useState(null);
-  // console.log(cookie.cookies,"sd");
+  const [followerCount, setFollowerCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
 
-  async function newcookie() {
-    const posts = await AxiosInstance.get("/api/user/profile", {
-      headers: {
-        Authorization: `bearer ${cookie.cookies}`,
-      },
-    });
-    setState(posts.data);
-  }
+  const newcookie = async () => {
+    try {
+      const posts = await AxiosInstance.get("/api/user/profile", {
+        headers: {
+          Authorization: `bearer ${cookie.cookies}`,
+        },
+      });
+     
+      setState(posts.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
     newcookie();
+  }, []); 
+ 
+
+const user=JSON.parse(localStorage.getItem("user"))
+const userId=user?._id
+
+   
+  const getFollowersCount = async () => {
+    try {
+      const followersCountResponse = await AxiosInstance.get(
+        `/api/user/followersCount/${userId}`,
+       
+        {
+          headers: {
+            Authorization: `bearer ${cookie.cookies}`,
+          },
+        }
+      );
+  
+      return setFollowerCount(followersCountResponse.data.count);
+    } catch (error) {
+      console.error("Error fetching followers count:", error);
+    
+      throw error;
+    }
+  };
+
+
+  useEffect(() => {
+    getFollowersCount();
+  }, []); 
+    
+   
+
+  useEffect(() => {
 
     async function newcookiess() {
       const userposts = await AxiosInstance.get("/api/user/profileposts", {
@@ -68,7 +107,6 @@ function Profile() {
     newcookiess();
   }, [liking]);
 
- 
   const handleComment = (postId) => {
     setOpenCommentModal(true);
     setSelectedPostId(postId);
@@ -77,12 +115,12 @@ function Profile() {
   const handleCloseCommentModal = () => {
     setOpenCommentModal(false);
     setSelectedPostId(null);
-    setCommentInput('');
+    setCommentInput("");
   };
 
   const handleAddComment = async () => {
     try {
-      await AxiosInstance.post('/api/user/comment/', {
+      await AxiosInstance.post("/api/user/comment/", {
         userId: mypost?.userpro?._id,
         postId: selectedPostId,
         text: commentInput,
@@ -94,10 +132,6 @@ function Profile() {
       console.error(error);
     }
   };
-
-
-
-
 
   const handleEditProfileClick = () => {
     setEditProfileOpen(true);
@@ -117,25 +151,11 @@ function Profile() {
 
   const handleLogout = () => {
     removecookie("cookies");
-    localStorage.removeItem("user")
+    localStorage.removeItem("user");
     navigate("/");
   };
 
-  const handleFollow = async (userId) => {
-    try {
-      const response = await AxiosInstance.post(`/api/user/follow/${userId}`);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleUnfollow = async (userId) => {
-    try {
-      const response = await AxiosInstance.post(`/api/user/unfollow/${userId}`);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+ 
 
   const handleLike = async (postId) => {
     try {
@@ -144,50 +164,20 @@ function Profile() {
         postId: postId,
       });
 
-      setLiking(!liking)
-
-      //   setMypost((prevMypost) =>
-      //   prevMypost.map((post) =>
-      //     post._id === postId
-      //       ? { ...post, likes: [...post.likes, { userId: state?.userpro?._id }] }
-      //       : post
-      //   )
-      // );
+      setLiking(!liking);
     } catch (error) {
       console.error(error);
     }
-    // window.location.reload()
   };
- 
+
   const navigate = useNavigate();
 
-  const viewComment=()=>{
-    const postId= selectedPostId;
-    navigate(`/comments/${postId}`)
-  }
+  const viewComment = () => {
+    const postId = selectedPostId;
+    navigate(`/comments/${postId}`);
+  };
 
-  // useEffect( () => {
-  //   async function postcookie(){
-
-  //     const profileposts =  await AxiosInstance.get(
-  //         `/api/user/profile/${state.userpro.id}`,
-  //         {
-
-  //           headers:{
-  //             Authorization:`bearer ${cookie.cookies}`
-  //           }
-
-  //         }
-  //       );
-
-  //       console.log( profileposts.data);
-  //       setState( profileposts.data)
-
-  //   }
-
-  //   postcookie()
-  // },[])
-
+  
   return (
     <>
       <div>
@@ -215,28 +205,17 @@ function Profile() {
               }}
             >
               <div>
-                <Button onClick={() => handleFollow(state?.userId)}>
-                  Followers
+                <Button onClick={() => navigate("/followers")}>
+                  Followers({followerCount}) 
                 </Button>
               </div>
               <div>
-                <Button onClick={() => handleUnfollow(state?.userId)}>
-                  Following
+                <Button onClick={() => navigate("/following")}>
+                  Following({followingCount})
                 </Button>
               </div>
             </div>
           </div>
-
-          {/* <div className="ProfilePosts">
-            <h2>User Posts</h2>
-            {mypost?.data?.map((post) => (
-              <div key={post._id}>
-                <p>{post.description}</p>
-                <img src={post.image} width={500} />
-              </div>
-            ))}
-          </div>
-        </div> */}
 
           <div>
             <u>
@@ -268,7 +247,6 @@ function Profile() {
                     <h1>No posts found</h1>
                   )}
 
-                  {/* <CardMedia component="img" image={post.image} alt="Paella dish" /> */}
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
                       {post?.description}
@@ -277,23 +255,24 @@ function Profile() {
                   <CardActions disableSpacing>
                     <IconButton
                       aria-label="add to favorites"
-                      onClick={() => handleLike(post._id)}
+                      onClick={()=>{handleLike(post._id)}}
                     >
                       <FavoriteIcon />
-                      {/* {post?.isLiked ? <FavoriteRounded /> : <FavoriteBorderRounded />} */}
+  
                     </IconButton>
                     <Typography variant="body2" color="text.secondary">
                       {post?.likes.length}
                     </Typography>
-                    <IconButton aria-label="comment"
-                    onClick={() => handleComment(post._id)}
+                    <IconButton
+                      aria-label="comment"
+                      onClick={() => handleComment(post._id)}
                     >
-                      <ChatBubbleOutlineRoundedIcon/>
+                      <ChatBubbleOutlineRoundedIcon />
                     </IconButton>
                     <Typography variant="body2" color="text.secondary">
                       {post?.comments.length}
                     </Typography>
-                     &nbsp;
+                    &nbsp;
                     <IconButton aria-label="retweet">
                       <RepeatRoundedIcon />
                     </IconButton>
@@ -308,46 +287,57 @@ function Profile() {
             </Card>
 
             <Dialog open={openCommentModal} onClose={handleCloseCommentModal}>
-        <DialogContent>
-          <Card>
-            <CardHeader
-              avatar={<Avatar aria-label="recipe" src={mypost?.userpro?.Avatar} />}
-              action={
-                <IconButton aria-label="close" onClick={handleCloseCommentModal}>
-                  <CloseIcon />
-                </IconButton>
-              }
-              title={mypost?.userpro?.username}
-              subheader="September 14, 2016"
-            />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {mypost?.userpro?.username} is commenting:
-              </Typography>
-              <TextField
-                label="Add a comment..."
-                multiline
-                rows={4}
-                value={commentInput}
-                onChange={(e) => setCommentInput(e.target.value)}
-              />
-            </CardContent>
-            <CardActions>
-              <Button variant="contained" color="primary" onClick={handleAddComment}>
-                Submit
-              </Button>
-              <Button
-                 variant="contained"
-                 color="primary"
-                 onClick={viewComment}
-              >
-                 view Comments
-               </Button>
-            </CardActions>
-          </Card>
-        </DialogContent>
-      </Dialog>
-
+              <DialogContent>
+                <Card>
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        aria-label="recipe"
+                        src={mypost?.userpro?.Avatar}
+                      />
+                    }
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        onClick={handleCloseCommentModal}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    }
+                    title={mypost?.userpro?.username}
+                    subheader="September 14, 2016"
+                  />
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {mypost?.userpro?.username} is commenting:
+                    </Typography>
+                    <TextField
+                      label="Add a comment..."
+                      multiline
+                      rows={4}
+                      value={commentInput}
+                      onChange={(e) => setCommentInput(e.target.value)}
+                    />
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleAddComment}
+                    >
+                      Submit
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={viewComment}
+                    >
+                      view Comments
+                    </Button>
+                  </CardActions>
+                </Card>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
 
