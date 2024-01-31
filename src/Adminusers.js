@@ -16,9 +16,11 @@ function Adminusers() {
                 },
              }
           );
-           return setUsersList()
+           return setUsersList(alltheUsers.data._id)
         } catch (error) {
-            
+
+          console.error("Error fetching all the users:", error);
+          throw error;
         }
     }
 
