@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BarChart } from '@mui/x-charts/BarChart';
+import { AxiosInstance } from './AxiosInstance';
+import { useCookies } from 'react-cookie';
 
 export default function Admindashboard() {
+
+  const [totalUsers,setTotalUsers] = useState(0)
+  const [cookie,setCookies] = useCookies(["cookies"])
+
+  const fetchTotalUsers = async () => {
+    try {
+      const theUsers = await AxiosInstance.get("/api/admin/users",{
+        headers:{
+          Authorization: `bearer ${cookie.cookies}`,
+        },
+      }) 
+        return setTotalUsers(theUsers.data.length)
+      
+    } catch (error) {
+      console.error("Error fetching number of users", error);
+          throw error;
+    }
+  }
+
+  useEffect(()=>{
+    fetchTotalUsers()
+  },[])
+ 
   return (
+   <div>
     <BarChart
       series={[
         { data: [3, 4, 1, 6, 5], stack: 'A', label: 'Series A1' },
@@ -14,7 +40,8 @@ export default function Admindashboard() {
       width={600}
       height={350}
     />
-    
+     <p> Current Total Users :<b> {totalUsers} </b></p>
+  </div>
 
   );
 }

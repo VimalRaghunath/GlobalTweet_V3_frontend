@@ -20,6 +20,7 @@ import { SnackbarProvider } from "notistack";
 import Followers from "./Components/Home/Followers";
 import Following from "./Components/Home/Following";
 import Adminusers from "./Adminusers";
+import Adminposts from "./Adminposts";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
                 <Route element={<AdminHome />}>
                   <Route path="/users" element={<Adminusers/>} />
                   <Route path="/admindash" element={<Admindashboard />} />
+                  <Route path="/adminposts" element={<Adminposts/>} />
                 </Route>
               </>
             ) : (
