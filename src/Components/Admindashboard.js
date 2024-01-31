@@ -14,6 +14,7 @@ export default function Admindashboard() {
       width={600}
       height={350}
     />
+    
 
   );
 }
