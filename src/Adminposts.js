@@ -35,53 +35,76 @@ function Adminposts() {
   const [usersList, setUsersList] = useState([]);
   const [usersPosts, setUsersPosts] = useState([]);
   const [expanded, setExpanded] = useState(false);
+  const [allPosts,setAllPosts] = useState([])
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const allUsers = async () => {
+
+  const getAllposts = async () => {
     try {
-      const alltheUsers = await AxiosInstance.get("/api/admin/users", {
-        headers: {
-          Authorization: `bearer ${cookie.cookies}`,
+      const fetchAlldata = await AxiosInstance.get("/api/admin/posts",{
+        headers : {
+          Authorization: `bearer ${cookie.cookies}`
         },
-      });
-      return setUsersList(alltheUsers.data);
+     })
+     return setAllPosts(fetchAlldata.data.data)
+      
     } catch (error) {
-      console.error("Error fetching all the users:", error);
+      console.error("error fetching all the users:", error)
       throw error;
     }
-  };
+  }
 
-  useEffect(() => {
-    allUsers();
-  }, []);
+  console.log("jjjj",allPosts);
 
-  const viewPosts = async () => {
-    try {
-      const viewAllposts = await AxiosInstance.get("/api/admin/posts", {
-        headers: {
-          Authorization: `bearer ${cookie.cookies}`,
-        },
-      });
-      console.log(viewAllposts);
-      return setUsersPosts(viewAllposts.data);
-    } catch (error) {
-      console.error("Error fetching all the posts :", error);
-      throw error;
-    }
-  };
+  useEffect(()=>{
+    getAllposts();
+  }, [])
 
-  useEffect(() => {
-    viewPosts();
-  }, []);
+  // const allUsers = async () => {
+  //   try {
+  //     const alltheUsers = await AxiosInstance.get("/api/admin/users", {
+  //       headers: {
+  //         Authorization: `bearer ${cookie.cookies}`,
+  //       },
+  //     });
+  //     return setUsersList(alltheUsers.data);
+  //   } catch (error) {
+  //     console.error("Error fetching all the users:", error);
+  //     throw error;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   allUsers();
+  // }, []);
+
+  // const viewPosts = async () => {
+  //   try {
+  //     const viewAllposts = await AxiosInstance.get("/api/admin/posts", {
+  //       headers: {
+  //         Authorization: `bearer ${cookie.cookies}`,
+  //       },
+  //     });
+  //     console.log(viewAllposts);
+  //     return setUsersPosts(viewAllposts.data);
+  //   } catch (error) {
+  //     console.error("Error fetching all the posts :", error);
+  //     throw error;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   viewPosts();
+  // }, []);
 
   return (
     <div>
       <h3 style={{display:"flex",justifyContent:"center"}} >All Posts</h3>
     <div style={{display:"flex"}} >
-      {usersList.map((useritem) => (
+      {allPosts.map((useritem) => (
         <div key={useritem._id}>
           <Card sx={{ maxWidth: 345 }}>
             <CardHeader
@@ -102,28 +125,29 @@ function Adminposts() {
               title={useritem.username}
               subheader="September 14, 2016"
             />
-            {usersPosts.map((postitem) => (
-              <div key={postitem._id}>
+            {/* {allPosts.map((postitem) => ( */}
+              <div >
+               {/* key={postitem._id} */}
                 <CardMedia
                   component="img"
                   height="194"
-                  image={postitem.image}
+                  image={useritem.image}
                   alt="Paella dish"
                 />
                 <CardContent>
                   <Typography variant="body2" color="text.secondary">
-                    {postitem.description}
+                    {useritem.description}
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
                   <IconButton aria-label="add to favorites">
-                    {postitem.likes.length}
+                    {useritem.likes.length}
                     <FavoriteIcon />
                   </IconButton>
                   <IconButton
                     aria-label="comment">
                     <ChatBubbleOutlineRoundedIcon />
-                    {postitem.comments.length}
+                    {useritem.comments.length}
                   </IconButton>
                   <IconButton aria-label="share">
                     <ShareIcon />
@@ -138,7 +162,7 @@ function Adminposts() {
                   </ExpandMore>
                 </CardActions>
               </div>
-            ))}
+            {/* ))} */}
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography paragraph>Method:</Typography>
