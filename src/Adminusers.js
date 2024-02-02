@@ -93,7 +93,7 @@ function Adminusers() {
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <Table sx={{ minWidth: 950 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell>Name</StyledTableCell>
