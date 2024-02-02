@@ -32,8 +32,6 @@ const ExpandMore = styled((props) => {
 
 function Adminposts() {
   const [cookie, setCookie] = useCookies(["cookies"]);
-  const [usersList, setUsersList] = useState([]);
-  const [usersPosts, setUsersPosts] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [allPosts,setAllPosts] = useState([])
 
@@ -57,64 +55,27 @@ function Adminposts() {
     }
   }
 
-  console.log("jjjj",allPosts);
-
   useEffect(()=>{
     getAllposts();
   }, [])
 
-  // const allUsers = async () => {
-  //   try {
-  //     const alltheUsers = await AxiosInstance.get("/api/admin/users", {
-  //       headers: {
-  //         Authorization: `bearer ${cookie.cookies}`,
-  //       },
-  //     });
-  //     return setUsersList(alltheUsers.data);
-  //   } catch (error) {
-  //     console.error("Error fetching all the users:", error);
-  //     throw error;
-  //   }
-  // };
 
-  // useEffect(() => {
-  //   allUsers();
-  // }, []);
-
-  // const viewPosts = async () => {
-  //   try {
-  //     const viewAllposts = await AxiosInstance.get("/api/admin/posts", {
-  //       headers: {
-  //         Authorization: `bearer ${cookie.cookies}`,
-  //       },
-  //     });
-  //     console.log(viewAllposts);
-  //     return setUsersPosts(viewAllposts.data);
-  //   } catch (error) {
-  //     console.error("Error fetching all the posts :", error);
-  //     throw error;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   viewPosts();
-  // }, []);
 
   return (
     <div>
       <h3 style={{display:"flex",justifyContent:"center"}} >All Posts</h3>
-    <div style={{display:"flex"}} >
-      {allPosts.map((useritem) => (
-        <div key={useritem._id}>
+    <div style={{display:"flex",gap:"10px"}} >
+      {allPosts.map((useritem,index) => (
+        <div key={index}>
           <Card sx={{ maxWidth: 345 }}>
             <CardHeader
               avatar={
                 <Avatar
-                  src={useritem.Avatar}
+                  src= {useritem?.userId?.Avatar}
                   sx={{ bgcolor: red[500] }}
                   aria-label="recipe"
                 >
-                  {useritem.avatar}
+                 
                 </Avatar>
               }
               action={
@@ -122,12 +83,10 @@ function Adminposts() {
                   <MoreVertIcon />
                 </IconButton>
               }
-              title={useritem.username}
+              title={useritem.userId.name}
               subheader="September 14, 2016"
             />
-            {/* {allPosts.map((postitem) => ( */}
               <div >
-               {/* key={postitem._id} */}
                 <CardMedia
                   component="img"
                   height="194"
@@ -162,7 +121,6 @@ function Adminposts() {
                   </ExpandMore>
                 </CardActions>
               </div>
-            {/* ))} */}
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
                 <Typography paragraph>Method:</Typography>
@@ -175,11 +133,6 @@ function Adminposts() {
           </Card>
         </div>
       ))}
-      {/* {usersPosts?.map((item) => (
-        <div key={item._id}>
-          <p>{item._id}</p>
-        </div>
-      ))} */}
     </div>
     </div>
   );

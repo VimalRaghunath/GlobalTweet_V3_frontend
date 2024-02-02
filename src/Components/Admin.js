@@ -89,6 +89,9 @@ export default function AdminHome() {
   const handleallpostsbuttonClick = () => {
     navigate ('/adminposts')
   }
+  const handleallBlockedusersbuttonClick = () => {
+    navigate ('/blockedusers')
+  }
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -106,7 +109,7 @@ export default function AdminHome() {
       <Box sx={{ display: 'flex' }}>
      
         <CssBaseline />
-        <AppBar position="absolute" sx={{ backgroundColor: "orange" }} open={open}>
+        <AppBar position="absolute" sx={{ backgroundColor: "indigo" }} open={open}>
           <Toolbar
             sx={{
               pr: '24px',
@@ -176,7 +179,7 @@ export default function AdminHome() {
               </ListItemIcon>
               <ListItemText primary="Users" />
             </ListItemButton >
-            <ListItemButton >
+            <ListItemButton onClick={handleallBlockedusersbuttonClick} >
               <ListItemIcon>
                 <LayersIcon />
               </ListItemIcon>
@@ -187,7 +190,7 @@ export default function AdminHome() {
           <ListSubheader component="div" inset>
             Content
           </ListSubheader>
-          <ListItemButton onClick={handleallpostsbuttonClick}        >
+          <ListItemButton onClick={handleallpostsbuttonClick} >
             <ListItemIcon>
               <AssignmentIcon />
             </ListItemIcon>

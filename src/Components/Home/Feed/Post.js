@@ -24,7 +24,6 @@ import { useNavigate } from "react-router-dom";
 
 function Post({ userId }) {
   const [post, setPost] = useState([]);
-  // const [posts,setPosts] = useState([]);
   const [liking, setLiking] = useState(false);
   const [commenting, setCommenting] = useState([]);
   const [openCommentModal, setOpenCommentModal] = useState(false);

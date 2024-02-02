@@ -19,7 +19,7 @@ export default function Admindashboard() {
       
     } catch (error) {
       console.error("Error fetching number of users", error);
-          throw error;
+      throw error;
     }
   }
 
