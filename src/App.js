@@ -22,6 +22,7 @@ import Following from "./Components/Home/Following";
 import Adminusers from "./Adminusers";
 import Adminposts from "./Adminposts";
 import AdminBlockedusers from "./Components/AdminBlockedusers";
+import AdminViewpostdetails from "./AdminViewpostdetails";
 
 
 function App() {

@@ -115,9 +115,9 @@ function Adminusers() {
                   <StyledTableCell align="right">{item.mobile}</StyledTableCell>
                   <StyledTableCell align="right">
                     {!item.isBlocked ? (
-                      <Button onClick={() => handleBlocked(item._id)}>Block</Button>
+                      <Button variant="outlined" color="error" onClick={() => handleBlocked(item._id)}>Block</Button>
                     ) : (
-                      <Button onClick={() => handleUnblocked(item._id)}>Unblock</Button>
+                      <Button  variant="contained" color="error" onClick={() => handleUnblocked(item._id)}>Unblock</Button>
                     )}
                   </StyledTableCell>
                 </StyledTableRow>

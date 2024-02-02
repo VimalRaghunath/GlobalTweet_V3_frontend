@@ -90,7 +90,7 @@ export default function AdminHome() {
     navigate ('/adminposts')
   }
   const handleallBlockedusersbuttonClick = () => {
-    navigate ('/blockedusers')
+  navigate ('/blockedusers')
   }
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -195,12 +195,6 @@ export default function AdminHome() {
               <AssignmentIcon />
             </ListItemIcon>
             <ListItemText primary="View posts" />
-          </ListItemButton>
-          <ListItemButton >
-            <ListItemIcon>
-              <AdjustIcon/>
-            </ListItemIcon>
-            <ListItemText primary="View Reports" />
           </ListItemButton>
         </Drawer>
         <Box
