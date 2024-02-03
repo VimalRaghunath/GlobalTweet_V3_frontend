@@ -14,6 +14,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
+import moment from "moment";
 import {
   Card,
   CardActions,
@@ -260,8 +261,8 @@ const userId=user?._id
                       </IconButton>
                     }
                     title={post?.userId?.username}
-                    subheader="September 14, 2016"
-                  />
+                    subheader={moment(post.createdAt).fromNow()}
+                    />
 
                   {post?.image ? (
                     <CardMedia

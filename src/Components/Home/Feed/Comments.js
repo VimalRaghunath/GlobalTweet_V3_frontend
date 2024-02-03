@@ -83,7 +83,6 @@ const Comments = () => {
     }
   };
 
-  // console.log(userId,"ss");
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div>
