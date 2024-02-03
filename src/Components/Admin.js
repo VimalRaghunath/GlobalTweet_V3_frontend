@@ -194,7 +194,7 @@ export default function AdminHome() {
             <ListItemIcon>
               <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="View posts" />
+            <ListItemText primary="View posts"/>
           </ListItemButton>
         </Drawer>
         <Box
