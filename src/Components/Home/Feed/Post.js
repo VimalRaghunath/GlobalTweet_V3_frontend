@@ -21,6 +21,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { AxiosInstance } from "../../AxiosInstance";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
+
 
 function Post({ userId }) {
   const [post, setPost] = useState([]);
@@ -99,7 +101,7 @@ const viewComment=()=>{
                   </IconButton>
                 }
                 title={postItem?.userId?.name}
-                subheader="September 14, 2016"
+                subheader={moment(postItem.createdAt).fromNow()}
               />
 
               {postItem?.image ? (
