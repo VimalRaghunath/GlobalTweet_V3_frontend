@@ -28,7 +28,7 @@ const Messages = () => {
         // onChange={(e) => setNewMessage(e.target.value)}
       />
 
-      <Button >Send Message</Button>
+      <Button> Send Message </Button>
     </div>
   </div>
 );
