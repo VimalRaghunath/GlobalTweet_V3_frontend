@@ -10,10 +10,16 @@
 .Explore{
 
     display: flex;
+    justify-content: center;
     flex-direction: row;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 2rem 2rem;
     border-bottom: 1px solid;
+}
+
+.Inputbox{
+  height: 2.5rem;
+  width: 20rem;
 }
 
 .Exploree{

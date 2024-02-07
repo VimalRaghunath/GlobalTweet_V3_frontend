@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from './Sidebar/Sidebar'
 import "./Messages.css"
 import { Button } from '@mui/material'
@@ -11,8 +11,10 @@ const Messages = () => {
   // const [newMessage, setNewMessage] = useState('');
 
 
-  return (
 
+  return (
+  
+  <div>
     <div className='Messages'>
     <Sidebar />
     <div className='Messagesbox'>
@@ -31,6 +33,7 @@ const Messages = () => {
       <Button> Send Message </Button>
     </div>
   </div>
+</div>
 );
 };
 
