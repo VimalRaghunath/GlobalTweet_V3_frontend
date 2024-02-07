@@ -11,6 +11,10 @@
     display: flex;
     justify-content: center;
     position: relative;
-    left: 300px;
-    
+    left: 30rem;
+}
+
+.InputBox1{
+    height: 3rem;
+    width: 20rem;
 }

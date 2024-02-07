@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Sidebar from "./Sidebar/Sidebar";
 import "./Explore.css";
 import { TextField, Button, CircularProgress } from "@mui/material";
-import { ChatState } from "../Context/ChatProvider";
+import { ChatContext, ChatState } from "../Context/ChatProvider";
 import { AxiosInstance } from "../AxiosInstance";
 import { useCookies } from "react-cookie";
-import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import ChatLoading from "./ChatLoading";
+import UserListItem from "./UserListItem";
 
 function Explore({ userId }) {
   // const [query, setQuery] = useState('')
@@ -22,6 +22,7 @@ function Explore({ userId }) {
 
 
   const  user = JSON.parse(localStorage.getItem("user"))
+  const {setSelectedChat,chats,setChats}=useContext(ChatContext)
 
   const handleSearch = async () => {
 
@@ -41,29 +42,38 @@ function Explore({ userId }) {
         console.log(error.message);
       }
     }
-    // try {
-    //   setLoading(true);
-    //   const response = await fetch(
-    //     `/api/search?query=${encodeURIComponent(query)}`
-    //   );
-    //   const data = await response.json();
-    //   setResults(data);
-    // } catch (error) {
-    //   console.error("Error searching:", error.message);
-    //   setError("An error occurred while searching. Please try again ");
-    // } finally {
-    //   setLoading(false);
-    // }
+    
   };
-
   useEffect(()=>{
     handleSearch();
   },[])
 
+  const accessChat = async (userId) => {
+    try {
+      setLoadingChat(true)
+      const config = await AxiosInstance.get("/api/user/chat",{userId},{
+        headers:{
+          "Content-type": "application/json",
+          Authorization: `bearer ${cookie.cookies}`
+        },
+      })
+      if(!chats.find((c) => c._id === config.data._id)) setChats([config.data, ...chats])
+      setLoadingChat(false)
+      setSelectedChat(config.data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  useEffect(()=>{
+    accessChat()
+  },[]);
+
+
   return (
    <div style={{ width: "100%" }}>
+    <Sidebar/>
     <div className="Explore">
-      <Sidebar />
 
     <Box sx={{ display: 'flex' }}>
       <input 
@@ -79,11 +89,17 @@ function Explore({ userId }) {
     </Box>
     </div>
    
-    {loading ? (
+    {loading ? 
       <ChatLoading/>
-    ):(
-      <span>Results</span>
+    :(
+      searchResult?.map((user)=>(
+        <UserListItem key={user._id}
+            user={user}
+            handleFunction={()=>accessChat(user._id)}
+        />
+      ))
     )}
+    
    </div>
   );
 }
