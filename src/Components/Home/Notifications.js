@@ -1,33 +1,12 @@
-// import React, { useState } from 'react'
-// import Sidebar from './Sidebar/Sidebar'
-// import "./Notifications.css"
-// import { Socket } from 'socket.io-client'
-// // import io from 'socket.io-client'
-// import { Button } from '@mui/material'
+import React from 'react'
+import Sidebar from './Sidebar/Sidebar'
 
-// const Notifications = () => {
-  
-//   const [notificationData, setNotificationData] = useState('')
-  
-//  const sendNotification = () => {
-//   Socket.emit('notification',notificationData)
-//  }
+function Notifications() {
+  return (
+    <div>
+      <Sidebar/>
+    </div>
+  )
+}
 
-//   return (
-
-//     <div className='Notifications'>
-
-//       <Sidebar/>
-
-//       <Button onClick={sendNotification}>Send Notification</Button>
-
-//       <h2>Notifications</h2>
-
-
-     
-
-//     </div>
-//   )
-// }
-
-// export default Notifications
+export default Notifications
