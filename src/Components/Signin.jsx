@@ -44,8 +44,13 @@ function Signin() {
 
       }
     } catch (error) {
-      enqueueSnackbar('login failed')
-      console.error(error);
+      if (error.response.status == 401){
+        enqueueSnackbar('login failed, you are a Blocked user')
+      } else {
+
+        enqueueSnackbar('login failed')
+        console.error(error);
+      }
     }
   };
 
