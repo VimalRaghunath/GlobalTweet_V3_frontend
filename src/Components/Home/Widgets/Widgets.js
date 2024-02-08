@@ -20,7 +20,10 @@ function Widgets() {
 
   useEffect(() => {
     async function getall() {
-      const profiles = await AxiosInstance.get("/api/user/allusers", { id });
+      const profiles = await AxiosInstance.get("/api/user/allusers",
+     { headers: {
+        Authorization: `Bearer ${cookie.cookies}`,
+      }}, { id });
 
       setPeoples(profiles.data);
     }

@@ -5,14 +5,13 @@ import { useCookies } from "react-cookie";
 import { AxiosInstance } from "./AxiosInstance";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "./Firebase";
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { useSnackbar } from "notistack";
 
 function Signin() {
-  const [_, setcookie] = useCookies(["cookies"]);
+  const [ , setcookie] = useCookies(["cookies"]);
   const navigate = useNavigate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar,  } = useSnackbar();
 
   const Signin = async (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ function Signin() {
 
       }
     } catch (error) {
-      if (error.response.status == 401){
+      if (error.response.status === 401){
         enqueueSnackbar('login failed, you are a Blocked user')
       } else {
 

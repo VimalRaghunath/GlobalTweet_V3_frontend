@@ -33,29 +33,36 @@ function TweetBox() {
     getUser();
   }, []);
 
+
+  
   const handleUpload = async (e) => {
     e.preventDefault();
-    
-    const photo = await upload(file);
-      
-        try {
-          await AxiosInstance.post(
-            `/api/user/newpost`,
-            {
-              title: "",
-              image: photo || "",
-              description: e.target.description.value || "",
-              category: "",
-            },
-            {
-              headers: {
-                Authorization: `bearer ${cookie.cookies}`,
-              },
-            }
-          );
-        } catch (error) {
-          console.log(error.message);
+  
+    let photo = "";
+    if (file) {
+      photo = await upload(file);
+    }
+  
+    try {
+      await AxiosInstance.post(
+        `/api/user/newpost`,
+        {
+          title: "",
+          image: photo || "",
+          description: e.target.description.value || "",
+          category: "",
+        },
+        {
+          headers: {
+            Authorization: `bearer ${cookie.cookies}`,
+          },
         }
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  
+  
   };
 
   return (

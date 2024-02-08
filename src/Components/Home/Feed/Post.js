@@ -82,7 +82,7 @@ const viewComment=()=>{
   const postId= selectedPostId;
   navigate(`/comments/${postId}`)
 }
-
+console.log(post);
   return (
     <div>
       <h2> posts </h2>
