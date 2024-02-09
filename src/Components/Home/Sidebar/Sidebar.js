@@ -26,7 +26,7 @@ const Sidebar = () => {
       alignItems="center"
     >
       <img className='image' src={Logo} alt="Logo" />
-      <div style={{ display: 'flex', flexDirection: "column" }}>
+      <div style={{ display: 'flex', flexDirection: "column",alignItems:"flex-start" }}>
         <IconButton onClick={() => navigate("/home")}><SidebarOption active Icon={Home} text="Home" /></IconButton>
         <IconButton onClick={() => navigate("/explore")}><SidebarOption Icon={Search} text="Explore" /></IconButton>
         <IconButton onClick={() => navigate("/notifications")}><SidebarOption Icon={NotificationsNone} text="Notifications" /></IconButton>

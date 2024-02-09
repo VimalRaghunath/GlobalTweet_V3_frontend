@@ -248,7 +248,7 @@ const userId=user?._id
             <u>
               <h2 style={{ textAlign: "center" }}>My Posts</h2>
             </u>
-            <Card sx={{ maxWidth: 545 }}>
+            <Card sx={{ maxWidth: 545, display:"flex", flexDirection:"column", position:'relative', left:"5rem" }}>
               {mypost.map((post) => (
                 <div key={post?._id}>
                   <CardHeader
@@ -271,7 +271,7 @@ const userId=user?._id
                       alt="Paella dish"
                     />
                   ) : (
-                    <h1>No posts found</h1>
+                    <h1> </h1>
                   )}
 
                   <CardContent>
