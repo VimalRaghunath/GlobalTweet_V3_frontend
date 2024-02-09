@@ -15,8 +15,8 @@ function Widgets() {
   const [peoples, setPeoples] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  const [cookie, removecookie] = useCookies(["cookies"]);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const [cookie, ] = useCookies(["cookies"]);
+  const { enqueueSnackbar,  } = useSnackbar();
 
 
     async function getall() {
