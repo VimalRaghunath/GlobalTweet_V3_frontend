@@ -18,7 +18,7 @@ function Widgets() {
   const [cookie, removecookie] = useCookies(["cookies"]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  useEffect(() => {
+
     async function getall() {
       const profiles = await AxiosInstance.get("/api/user/allusers",
      { headers: {
@@ -27,8 +27,11 @@ function Widgets() {
 
       setPeoples(profiles.data);
     }
-    getall();
-  }, []);
+
+
+  useEffect(()=>{
+getall()
+  },[])
 
   const handleFollow = async (userId) => {
     try {
@@ -48,7 +51,7 @@ function Widgets() {
         currentUser.following = follow;
         localStorage.setItem("user", JSON.stringify(currentUser));
       }
-      window.location.reload();
+      getall()
     } catch (error) {
       console.error("Error following user:", error);
     }
@@ -73,7 +76,7 @@ function Widgets() {
         localStorage.setItem("user", JSON.stringify(currentUser));
       }
     }
-      window.location.reload()
+      getall()
     } catch (error) {
       console.error("Error unfollowing user:", error);
     }
@@ -118,7 +121,7 @@ function Widgets() {
 
             {isFollowing(name._id) ? (
               <button
-                className="followbutton"
+                className="unfollowbutton"
                 onClick={() => handleUnfollow(name._id)}
               >
                 {" "}

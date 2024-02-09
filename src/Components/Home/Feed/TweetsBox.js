@@ -75,7 +75,7 @@ function TweetBox() {
             <input
               id="description"
               type="text"
-              placeholder="What's happening"
+              placeholder="What's happening...."
             />
           </div>
           <div className="TweetBoxinput">
