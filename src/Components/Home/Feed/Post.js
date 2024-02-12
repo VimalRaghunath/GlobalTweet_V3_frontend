@@ -85,11 +85,11 @@ const viewComment=()=>{
 console.log(post);
   return (
     <div>
-      <h2> posts </h2>
+      <h2 style={{display:"flex", flexDirection:"column", position:'relative', right:"2.5rem"}}> posts </h2>
 
       {post.data?.map((postItem, index) => (
         <div key={index}>
-          <Card sx={{ maxWidth: 545, marginBottom: "2rem" }}>
+          <Card sx={{ maxWidth: 545, display:"flex", flexDirection:"column", position:'relative', right:"5rem"}}>
             <div>
               <CardHeader
                 avatar={
