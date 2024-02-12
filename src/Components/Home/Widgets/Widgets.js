@@ -36,7 +36,7 @@ function Widgets() {
 
 
   useEffect(()=>{
-getall()
+    getall()
   },[])
 
   const handleFollow = async (userId) => {

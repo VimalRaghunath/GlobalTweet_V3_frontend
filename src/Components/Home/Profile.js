@@ -152,8 +152,8 @@ const userId=user?._id
         });
         setMypost(userposts.data.data);
       }
-      newcookiess();
-       }
+    }
+    newcookiess();
 
      
   }, [liking]);
