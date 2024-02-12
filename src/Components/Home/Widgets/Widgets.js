@@ -20,12 +20,18 @@ function Widgets() {
 
 
     async function getall() {
-      const profiles = await AxiosInstance.get("/api/user/allusers",
-     { headers: {
-        Authorization: `Bearer ${cookie.cookies}`,
-      }}, { id });
+      if(cookie.cookies === "undefined"){
+        navigate("/")
+       } else{
 
-      setPeoples(profiles.data);
+        const profiles = await AxiosInstance.get("/api/user/allusers",
+        { headers: {
+           Authorization: `Bearer ${cookie.cookies}`,
+         }}, { id });
+   
+         setPeoples(profiles.data);
+       }
+     
     }
 
 
@@ -94,7 +100,7 @@ getall()
 
       <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         {peoples?.map((name) => (
-          <ListItem alignItems="flex-start">
+          <ListItem key={name._id} alignItems="flex-start">
             <ListItemAvatar>
               <Avatar
                 style={{ width: "50px", height: "50px" }}

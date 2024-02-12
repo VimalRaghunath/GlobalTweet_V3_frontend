@@ -10,24 +10,34 @@ import {
     DialogTitle,
   } from "@mui/material";
 import { uploadCoverphoto } from '../CloudinaryCover';
+import { useNavigate } from 'react-router-dom';
 
 
 function Editcoverphoto({ open, onClose }) {
-
+const navigate = useNavigate()
     const [coverPhoto,setCoverphoto] = useState();
     const [cookie] = useCookies(['cookies']);
     const [state,setState] = useState("");
 
     useEffect(()=>{
-    async function covercookie() {
-        const posts = await AxiosInstance.get("/api/user/profile", {
-            headers: {
-                Authorization: `bearer ${cookie.cookies}`,
-            },
-        })
-        setState(posts.data)
+
+      if(cookie.cookies === "undefined"){
+        navigate("/")
+       } else{
+
+        async function covercookie() {
+          const posts = await AxiosInstance.get("/api/user/profile", {
+              headers: {
+                  Authorization: `bearer ${cookie.cookies}`,
+              },
+          })
+          setState(posts.data)
+       }
+  
+       covercookie()
     }
-    covercookie()})
+  
+  })
 
   const handleupload = async () => {
     try {

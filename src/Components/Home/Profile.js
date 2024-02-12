@@ -46,7 +46,11 @@ function Profile() {
   const [followingCount, setFollowingCount] = useState(0);
 
   const newcookie = async () => {
+   if(cookie.cookies === "undefined"){
+    navigate("/")
+   } else{
     try {
+      
       const posts = await AxiosInstance.get("/api/user/profile", {
         headers: {
           Authorization: `bearer ${cookie.cookies}`,
@@ -58,6 +62,8 @@ function Profile() {
       console.error('Error fetching data:', error);
     }
   };
+   }
+   
 
   useEffect(() => {
     newcookie();
@@ -90,30 +96,42 @@ const userId=user?._id
 
 
   useEffect(() => {
-    getFollowersCount();
+    if(cookie.cookies === "undefined"){
+      navigate("/")
+     } else{
+
+       getFollowersCount();
+     }
   }, []); 
     
 
   const getFollowingCount = async () => {
-    try {
-      const followingCountResponse = await AxiosInstance.get(
-        `/api/user/followingCount/${userId}`,
-       
-        {
-          headers: {
-            Authorization: `bearer ${cookie.cookies}`,
-          },
-        }
-      );
-  
-      return setFollowingCount(followingCountResponse.data.count);
-      
-    } catch (error) {
 
-      console.error("Error fetching followers count:", error);
+    if(cookie.cookies === "undefined"){
+      navigate("/")
+     } else{
+
+      try {
+        const followingCountResponse = await AxiosInstance.get(
+          `/api/user/followingCount/${userId}`,
+         
+          {
+            headers: {
+              Authorization: `bearer ${cookie.cookies}`,
+            },
+          }
+        );
     
-      throw error;
-    }
+        return setFollowingCount(followingCountResponse.data.count);
+        
+      } catch (error) {
+  
+        console.error("Error fetching followers count:", error);
+      
+        throw error;
+      }
+     }
+   
   };
 
   useEffect(() => {
@@ -124,14 +142,20 @@ const userId=user?._id
   useEffect(() => {
 
     async function newcookiess() {
-      const userposts = await AxiosInstance.get("/api/user/profileposts", {
-        headers: {
-          Authorization: `bearer ${cookie.cookies}`,
-        },
-      });
-      setMypost(userposts.data.data);
-    }
-    newcookiess();
+      if(cookie.cookies === "undefined"){
+        navigate("/")
+       } else{
+        const userposts = await AxiosInstance.get("/api/user/profileposts", {
+          headers: {
+            Authorization: `bearer ${cookie.cookies}`,
+          },
+        });
+        setMypost(userposts.data.data);
+      }
+      newcookiess();
+       }
+
+     
   }, [liking]);
 
   const handleComment = (postId) => {

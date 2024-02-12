@@ -10,9 +10,10 @@ import {
 import { AxiosInstance } from "../AxiosInstance";
 import { useCookies } from "react-cookie";
 import { uploadAvatar } from "../CloudinaryAvatar";
+import { useNavigate } from "react-router-dom";
 
 function Editprofile({ open, onClose }) {
-  
+  const navigate = useNavigate()
   const [avatar, setAvatar] = useState();
   const [cookie, , ] = useCookies(["cookies"]);
   const [state, setState] = useState("");
@@ -20,16 +21,22 @@ function Editprofile({ open, onClose }) {
   
 
   useEffect(() => {
-    async function newcookie() {
-      const posts = await AxiosInstance.get("/api/user/profile", {
-        headers: {
-          Authorization: `bearer ${cookie.cookies}`,
-        },
-      });
-      setState(posts.data);
-     
+    if(cookie.cookies === "undefined"){
+      navigate("/")
+     } else{
+      async function newcookie() {
+        const posts = await AxiosInstance.get("/api/user/profile", {
+          headers: {
+            Authorization: `bearer ${cookie.cookies}`,
+          },
+        });
+        setState(posts.data);
+       
+      }
+      newcookie()
+     }
     }
-    newcookie()},)
+    ,)
 
 
 
